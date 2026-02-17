@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Menu, ShoppingCart, X, Trash2, Plus, Minus } from 'lucide-vue-next'
-import logo from '../../assets/images/logo-ponto-do-lanche.png'
+import logo from '../../assets/images/logo-ponto-do-lanche.webp'
 import { useCartStore } from '../../stores/cartStore'
 import { storeToRefs } from 'pinia'
 

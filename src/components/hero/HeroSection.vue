@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import bg from '../../assets/images/bg-hero-section.png'
-import hamb from '../../assets/images/hamburguer.png'
+import bg from '../../assets/images/bg-hero-section.webp'
+import hamb from '../../assets/images/hamburguer.webp'
 </script>
 
 <template>
-  <section class="md:flex lg:px-20 lg:py-16 overflow-hidden"
-    :style="{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'bottom center', 'background-repeat': 'no-repeat' }">
+  <section class="md:flex lg:px-20 lg:py-16 overflow-hidden bg-[length:1000px] bg-bottom bg-no-repeat lg:bg-cover"
+    :style="{ backgroundImage: `url(${bg})` }">
     <div
       class="w-full bg-bg-hero py-5 text-brown md:bg-transparent md:w-1/2 lg:w-1/2 text-center lg:text-left lg:mt-0 flex flex-col justify-center">
       <h1 class="text-4xl md:text-white lg:text-5xl font-extrabold mb-6 leading-tight">
