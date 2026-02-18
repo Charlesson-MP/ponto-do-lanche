@@ -36,22 +36,22 @@ import { Instagram, Facebook, Mail, Phone } from 'lucide-vue-next'
           <a href="#"
             class="p-3 bg-gray-800 rounded-full hover:bg-accent hover:text-brown transition-all duration-300 shadow-lg group"
             aria-label="WhatsApp">
-            <Phone class="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <Phone class="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
           <a href="#"
             class="p-3 bg-gray-800 rounded-full hover:bg-accent hover:text-brown transition-all duration-300 shadow-lg group"
             aria-label="Email">
-            <Mail class="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <Mail class="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
           <a href="#"
             class="p-3 bg-gray-800 rounded-full hover:bg-accent hover:text-brown transition-all duration-300 shadow-lg group"
             aria-label="Instagram">
-            <Instagram class="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <Instagram class="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
           <a href="#"
             class="p-3 bg-gray-800 rounded-full hover:bg-accent hover:text-brown transition-all duration-300 shadow-lg group"
             aria-label="Facebook">
-            <Facebook class="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <Facebook class="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
         </div>
 
