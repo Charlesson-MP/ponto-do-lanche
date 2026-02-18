@@ -15,10 +15,10 @@ import hamb from '../../assets/images/hamburguer.webp'
         Saboreie o verdadeiro gosto de um hambúrguer artesanal. Ingredientes frescos, carne suculenta e molhos
         especiais.
       </p>
-      <button
+      <router-link to="/menu"
         class="bg-accent text-brown font-bold py-4 px-10 rounded-lg shadow-lg transition-transform hover:scale-105 active:scale-95 hover:bg-accent-dark text-lg self-center lg:self-start">
         Ver Cardápio
-      </button>
+      </router-link>
     </div>
 
     <div class="w-full md:w-1/2 lg:w-4/5 flex justify-center lg:justify-end items-center">
