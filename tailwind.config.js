@@ -21,5 +21,29 @@ export default {
       }
     }
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.text-shadow-sm': {
+          textShadow: '0 1px 2px rgba(0, 0, 0)',
+        },
+        '.text-shadow': {
+          textShadow: '0 2px 4px rgba(0, 0, 0, 0.10)',
+        },
+        '.text-shadow-md': {
+          textShadow: '0 4px 8px rgba(0, 0, 0, 0.12)',
+        },
+        '.text-shadow-lg': {
+          textShadow: '0 8px 16px rgba(0, 0, 0, 0.20)',
+        },
+        '.text-shadow-brown': {
+          textShadow: '2px 2px 2px #5D4037',
+        },
+        '.text-shadow-none': {
+          textShadow: 'none',
+        },
+      }
+      addUtilities(newUtilities)
+    },
+  ],
 }
