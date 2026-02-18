@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import logoFooter from '../../assets/images/logo-footer.webp'
-import { Instagram, Facebook, Mail, Phone } from 'lucide-vue-next'
+import { InstagramIcon, FacebookIcon, WhatsAppIcon, GmailIcon } from 'vue3-simple-icons'
 </script>
 
 <template>
@@ -12,9 +12,11 @@ import { Instagram, Facebook, Mail, Phone } from 'lucide-vue-next'
         <img :src="logoFooter" alt="Logo Ponto do Lanche" class="w-40 mb-6 drop-shadow-md">
         <nav>
           <ul class="flex flex-col gap-2">
-            <li><a href="/" class="text-gray-300 hover:text-accent font-medium text-lg transition-colors">Home</a></li>
-            <li><a href="/menu"
-                class="text-gray-300 hover:text-accent font-medium text-lg transition-colors">Cardápio</a></li>
+            <li><router-link to="/"
+                class="text-gray-300 hover:text-accent font-medium text-lg transition-colors">Home</router-link></li>
+            <li><router-link to="/menu"
+                class="text-gray-300 hover:text-accent font-medium text-lg transition-colors">Cardápio</router-link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -36,22 +38,22 @@ import { Instagram, Facebook, Mail, Phone } from 'lucide-vue-next'
           <a href="#"
             class="p-3 bg-gray-800 rounded-full hover:bg-accent hover:text-brown transition-all duration-300 shadow-lg group"
             aria-label="WhatsApp">
-            <Phone class="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <WhatsAppIcon class="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
           <a href="#"
             class="p-3 bg-gray-800 rounded-full hover:bg-accent hover:text-brown transition-all duration-300 shadow-lg group"
             aria-label="Email">
-            <Mail class="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <GmailIcon class="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
           <a href="#"
             class="p-3 bg-gray-800 rounded-full hover:bg-accent hover:text-brown transition-all duration-300 shadow-lg group"
             aria-label="Instagram">
-            <Instagram class="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <InstagramIcon class="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
           <a href="#"
             class="p-3 bg-gray-800 rounded-full hover:bg-accent hover:text-brown transition-all duration-300 shadow-lg group"
             aria-label="Facebook">
-            <Facebook class="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <FacebookIcon class="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
         </div>
 
