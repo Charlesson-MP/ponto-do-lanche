@@ -30,6 +30,7 @@ function focusAfterRender(getEl: () => HTMLElement | null) {
 
 function openMenu() {
   isMenuOpen.value = true
+  closeCart()
   focusAfterRender(() => menuDrawer.value)
 }
 
@@ -40,6 +41,7 @@ function closeMenu() {
 
 function openCart() {
   isCartOpen.value = true
+  closeMenu()
   focusAfterRender(() => cartDrawer.value)
 }
 
