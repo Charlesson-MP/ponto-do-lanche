@@ -17,42 +17,51 @@ const cartButton = ref<HTMLElement | null>(null)
 const cartDrawer = ref<HTMLElement | null>(null)
 
 // --- Focus management ---
+// Usa nextTick + requestAnimationFrame para garantir que o foco
+// seja aplicado depois que o browser terminar de processar o click do mouse.
+// Recebe uma função getter para ler a ref LAZILY (depois que o DOM foi atualizado).
+function focusAfterRender(getEl: () => HTMLElement | null) {
+  nextTick(() => {
+    requestAnimationFrame(() => {
+      getEl()?.focus()
+    })
+  })
+}
+
 function openMenu() {
   isMenuOpen.value = true
-  nextTick(() => {
-    menuDrawer.value?.focus()
-  })
+  focusAfterRender(() => menuDrawer.value)
 }
 
 function closeMenu() {
   isMenuOpen.value = false
-  nextTick(() => {
-    menuButton.value?.focus()
-  })
+  focusAfterRender(() => menuButton.value)
 }
 
 function openCart() {
   isCartOpen.value = true
-  nextTick(() => {
-    cartDrawer.value?.focus()
-  })
+  focusAfterRender(() => cartDrawer.value)
 }
 
 function closeCart() {
   isCartOpen.value = false
-  nextTick(() => {
-    cartButton.value?.focus()
-  })
+  focusAfterRender(() => cartButton.value)
 }
 
 // --- ESC key + Focus trap ---
 const FOCUSABLE_SELECTORS = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
+// Verifica se o elemento é realmente visível (não display:none)
+function isVisible(el: HTMLElement): boolean {
+  return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length)
+}
+
 // Focus trap genérico para qualquer drawer
 function trapFocus(e: KeyboardEvent, drawerEl: HTMLElement) {
   const focusables = Array.from(
     drawerEl.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS)
-  )
+  ).filter(isVisible)
+
   if (focusables.length === 0) {
     e.preventDefault()
     return
@@ -124,16 +133,18 @@ onBeforeUnmount(() => {
       :class="isMenuOpen ? 'translate-x-0' : '-translate-x-full invisible lg:visible'">
       <div class="flex justify-between items-center p-5 border-b lg:hidden">
         <p class="text-lg font-bold text-gray-800">Menu</p>
-        <button class="lg:hidden" aria-label="Fechar menu" @click="closeMenu">
+        <button
+          class="lg:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded"
+          aria-label="Fechar menu" @click="closeMenu">
           <X class="w-6 h-6 text-gray-600 hover:text-gray-900" :stroke-width="2.5" />
         </button>
       </div>
       <ul class="list-none flex flex-col lg:flex-row gap-6 lg:gap-8 items-center p-5 lg:p-0">
         <li><a href="/"
-            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors">Home</a>
+            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Home</a>
         </li>
         <li><a href="/menu"
-            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors">Cardápio</a>
+            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Cardápio</a>
         </li>
       </ul>
     </nav>
@@ -194,7 +205,7 @@ onBeforeUnmount(() => {
           <p class="text-lg font-bold text-gray-800">Total</p>
           <p class="text-xl font-bold text-primary">R$ {{ cart.totalPrice.toFixed(2) }}</p>
         </div>
-        <button class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors">
+        <button class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800">
           Finalizar Pedido
         </button>
       </div>
