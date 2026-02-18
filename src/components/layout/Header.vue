@@ -142,11 +142,11 @@ onBeforeUnmount(() => {
         </button>
       </div>
       <ul class="list-none flex flex-col lg:flex-row gap-6 lg:gap-8 items-center p-5 lg:p-0">
-        <li><a href="/"
-            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Home</a>
+        <li><router-link to="/"
+            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Home</router-link>
         </li>
-        <li><a href="/menu"
-            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Cardápio</a>
+        <li><router-link to="/menu"
+            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Cardápio</router-link>
         </li>
       </ul>
     </nav>
