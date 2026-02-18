@@ -127,11 +127,11 @@ onBeforeUnmount(() => {
       <img :src="logo" alt="Logo da lanchonete" class="h-20">
     </div>
 
-    <div v-if="isMenuOpen" class="fixed inset-0 bg-black/50 z-0 lg:hidden" @click="closeMenu"></div>
+    <div v-if="isMenuOpen" class="fixed inset-0 bg-black/50 z-40 lg:hidden" @click="closeMenu"></div>
 
     <nav ref="menuDrawer" role="dialog" aria-modal="true" aria-label="Menu de navegação" tabindex="-1"
       :aria-hidden="!isMenuOpen"
-      class="bg-white lg:bg-transparent w-64 lg:w-auto fixed lg:static top-0 left-0 h-screen lg:h-auto lg:px-0 lg:py-0 flex flex-col lg:flex-row z-10 shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 outline-none"
+      class="bg-white lg:bg-transparent w-64 lg:w-auto fixed lg:static top-0 left-0 h-screen lg:h-auto lg:px-0 lg:py-0 flex flex-col lg:flex-row z-50 lg:z-auto shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 outline-none"
       :class="isMenuOpen ? 'translate-x-0' : '-translate-x-full invisible lg:visible'">
       <div class="flex justify-between items-center p-5 border-b lg:hidden">
         <p class="text-lg font-bold text-gray-800">Menu</p>
@@ -162,10 +162,10 @@ onBeforeUnmount(() => {
         }}</span>
     </div>
 
-    <div v-if="isCartOpen" class="fixed inset-0 bg-black/50 z-10" @click="closeCart"></div>
+    <div v-if="isCartOpen" class="fixed inset-0 bg-black/50 z-40" @click="closeCart"></div>
 
     <div ref="cartDrawer" role="dialog" aria-modal="true" aria-label="Carrinho de compras" tabindex="-1"
-      class="fixed top-0 right-0 h-screen w-80 bg-white z-20 shadow-xl transition-transform duration-300 ease-in-out flex flex-col outline-none"
+      class="fixed top-0 right-0 h-screen w-80 bg-white z-50 shadow-xl transition-transform duration-300 ease-in-out flex flex-col outline-none"
       :aria-hidden="!isCartOpen" :class="isCartOpen ? 'translate-x-0' : 'translate-x-full invisible'">
       <div class="flex justify-between items-center p-5 border-b">
         <p class="text-lg font-bold text-gray-800">Carrinho</p>
@@ -207,7 +207,8 @@ onBeforeUnmount(() => {
           <p class="text-lg font-bold text-gray-800">Total</p>
           <p class="text-xl font-bold text-primary">R$ {{ cart.totalPrice.toFixed(2) }}</p>
         </div>
-        <button class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800">
+        <button
+          class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800">
           Finalizar Pedido
         </button>
       </div>
