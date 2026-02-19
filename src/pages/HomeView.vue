@@ -8,5 +8,5 @@ const mostOrdered = products.slice(0, 3)
 
 <template>
   <HeroSection />
-  <ProductList title="Mais Pedidos" :products="mostOrdered" />
+  <ProductList title="Mais Pedidos" :products="mostOrdered" :show-filters="false" />
 </template>
