@@ -73,6 +73,11 @@ export const useCartStore = defineStore('cart', {
         }
       }
       saveCartToStorage(this.items)
+    },
+
+    clearCart() {
+      this.items = []
+      saveCartToStorage(this.items)
     }
   },
   getters: {

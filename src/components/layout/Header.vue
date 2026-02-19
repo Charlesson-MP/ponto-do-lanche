@@ -4,12 +4,15 @@ import { Menu, ShoppingCart, X, Trash2, Plus, Minus } from 'lucide-vue-next'
 import logo from '../../assets/images/logo-ponto-do-lanche.webp'
 import { useCartStore } from '../../stores/cartStore'
 import { storeToRefs } from 'pinia'
+import { useToast } from '../../composables/useToast'
 
+const { showToast } = useToast()
 const cart = useCartStore()
 const { totalItems } = storeToRefs(cart)
 
 const isMenuOpen = ref(false)
 const isCartOpen = ref(false)
+const isClearConfirmOpen = ref(false)
 
 const menuButton = ref<HTMLElement | null>(null)
 const menuDrawer = ref<HTMLElement | null>(null)
@@ -120,6 +123,12 @@ function checkout() {
   console.log('Total:', cart.totalPrice)
   alert('Pedido registrado no console! Verifique as ferramentas do desenvolvedor.')
 }
+
+function handleClearCart() {
+  cart.clearCart()
+  isClearConfirmOpen.value = false
+  showToast('Carrinho esvaziado!', 'success')
+}
 </script>
 
 <template>
@@ -173,8 +182,14 @@ function checkout() {
     <div ref="cartDrawer" role="dialog" aria-modal="true" aria-label="Carrinho de compras" tabindex="-1"
       class="fixed top-0 right-0 h-screen w-80 bg-white z-50 shadow-xl transition-transform duration-300 ease-in-out flex flex-col outline-none"
       :aria-hidden="!isCartOpen" :class="isCartOpen ? 'translate-x-0' : 'translate-x-full invisible'">
-      <div class="flex justify-between items-center p-5 border-b">
-        <p class="text-lg font-bold text-gray-800">Carrinho</p>
+      <div class="flex justify-between items-center p-5 border-b shrink-0">
+        <div class="flex items-center gap-2">
+          <p class="text-lg font-bold text-gray-800">Carrinho</p>
+          <button v-if="totalItems > 0" @click="isClearConfirmOpen = true"
+            class="text-[10px] uppercase tracking-wider font-bold text-gray-400 hover:text-red-500 transition-colors px-2 py-1 rounded hover:bg-red-50">
+            Limpar
+          </button>
+        </div>
         <button aria-label="Fechar carrinho" @click="closeCart">
           <X class="w-6 h-6 text-gray-600 hover:text-gray-900" :stroke-width="2.5" />
         </button>
@@ -239,5 +254,61 @@ function checkout() {
       </div>
 
     </div>
+
+    <!-- Modal de Confirmação para Limpar Carrinho -->
+    <Teleport to="body">
+      <Transition name="fade">
+        <div v-if="isClearConfirmOpen" class="fixed inset-0 bg-black/60 z-[300] flex items-center justify-center p-4"
+          @click.self="isClearConfirmOpen = false">
+          <div class="bg-white rounded-2xl w-full max-w-[320px] p-6 shadow-2xl flex flex-col items-center text-center">
+            <div class="w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-4">
+              <Trash2 class="w-6 h-6" />
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Limpar carrinho?</h3>
+            <p class="text-sm text-gray-500 mb-6">Essa ação removerá todos os itens e não pode ser desfeita.</p>
+            <div class="flex flex-col w-full gap-2">
+              <button @click="handleClearCart"
+                class="w-full py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors">
+                Sim, limpar tudo
+              </button>
+              <button @click="isClearConfirmOpen = false"
+                class="w-full py-3 bg-gray-100 text-gray-600 font-bold rounded-xl hover:bg-gray-200 transition-colors">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </header>
 </template>
+
+<style scoped>
+.fade-enter-active {
+  animation: fade-in 0.25s ease-out;
+}
+
+.fade-leave-active {
+  animation: fade-out 0.2s ease-in forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+</style>
