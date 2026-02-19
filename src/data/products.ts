@@ -280,6 +280,14 @@ export const products: Product[] = [
         category: 'Acompanhamentos',
         image: 'https://www.dicasdemulher.com.br/wp-content/uploads/2017/04/receitas-de-molhos.jpg',
         ingredients: [],
-        addons: [],
+        addons: [
+            { id: 501, name: 'Porção dupla', price: 2.50 },
+        ],
+        flavors: [
+            { name: 'Barbecue' },
+            { name: 'Cheddar cremoso' },
+            { name: 'Maionese da casa' },
+            { name: 'Mostarda e mel' },
+        ],
     },
 ]
