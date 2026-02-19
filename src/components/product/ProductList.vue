@@ -4,6 +4,7 @@ import type { Product } from '../../types/product.ts'
 import ProductCard from './ProductCard.vue'
 import { useCartStore } from '../../stores/cartStore'
 import { Search } from 'lucide-vue-next'
+import { showToast } from '../../composables/useToast'
 
 const props = withDefaults(defineProps<{
   title: string
@@ -14,6 +15,12 @@ const props = withDefaults(defineProps<{
 })
 
 const cartStore = useCartStore()
+
+// Handler que adiciona ao carrinho e exibe o toast
+function handleAddToCart(product: Product) {
+  cartStore.addItem(product)
+  showToast(`${product.name} adicionado ao carrinho!`)
+}
 
 const searchQuery = ref('')
 const selectedCategory = ref('')
@@ -60,7 +67,7 @@ const filteredProducts = computed(() => {
     <!-- Grid de produtos -->
     <div v-if="filteredProducts.length" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product"
-        @add-to-cart="cartStore.addItem" />
+        @add-to-cart="handleAddToCart" />
     </div>
 
     <!-- Mensagem quando não há resultados -->
