@@ -26,14 +26,17 @@ const emit = defineEmits(['add-to-cart'])
         {{ product.category }}
       </p>
 
+      <p class="text-gray-400 text-xs leading-relaxed">
+        {{ product.description }}
+      </p>
+
       <div class="flex items-center justify-between mt-2">
         <span class="text-lg font-bold text-red-600">
           R$ {{ product.price.toFixed(2) }}
         </span>
 
         <button class="bg-red-600 text-white px-4 py-2 rounded-lg
-                 hover:bg-red-700 transition"
-          @click="emit('add-to-cart', product)">
+                 hover:bg-red-700 transition" @click="emit('add-to-cart', product)">
           Adicionar
         </button>
       </div>
