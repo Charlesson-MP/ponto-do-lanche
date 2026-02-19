@@ -17,6 +17,7 @@ const emit = defineEmits<{
     removedIngredients: string[]
     selectedAddons: { id: number; name: string; price: number }[]
     observation: string
+    basePrice: number
     finalPrice: number
     selectedFlavor?: string
     selectedSize?: string
@@ -159,6 +160,7 @@ function handleConfirm() {
       price: a.price,
     })),
     observation: observation.value.trim(),
+    basePrice: basePrice.value,
     finalPrice: finalPrice.value,
     ...(isBeverage.value && {
       selectedFlavor: selectedFlavor.value,

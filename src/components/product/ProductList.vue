@@ -34,6 +34,7 @@ function handleConfirm(payload: {
   removedIngredients: string[]
   selectedAddons: { id: number; name: string; price: number }[]
   observation: string
+  basePrice: number
   finalPrice: number
   selectedFlavor?: string
   selectedSize?: string
@@ -45,7 +46,7 @@ function handleConfirm(payload: {
     productId: selectedProduct.value.id,
     name: selectedProduct.value.name,
     image: selectedProduct.value.image,
-    basePrice: selectedProduct.value.price,
+    basePrice: payload.basePrice,
     removedIngredients: payload.removedIngredients,
     selectedAddons: payload.selectedAddons,
     observation: payload.observation,

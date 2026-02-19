@@ -114,6 +114,12 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', handleKeydown)
 })
+function checkout() {
+  console.log('--- Resumo do Pedido ---')
+  console.log('Itens no Carrinho:', cart.items)
+  console.log('Total:', cart.totalPrice)
+  alert('Pedido registrado no console! Verifique as ferramentas do desenvolvedor.')
+}
 </script>
 
 <template>
@@ -226,7 +232,7 @@ onBeforeUnmount(() => {
           <p class="text-lg font-bold text-gray-800">Total</p>
           <p class="text-xl font-bold text-primary">R$ {{ cart.totalPrice.toFixed(2) }}</p>
         </div>
-        <button
+        <button @click="checkout"
           class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800">
           Finalizar Pedido
         </button>
