@@ -3,6 +3,7 @@ import { RouterView } from 'vue-router';
 import Header from './components/layout/Header.vue';
 import Footer from './components/layout/Footer.vue';
 import ToastContainer from './components/ui/ToastContainer.vue';
+import CheckoutModal from './components/checkout/CheckoutModal.vue';
 </script>
 
 <template>
@@ -12,4 +13,5 @@ import ToastContainer from './components/ui/ToastContainer.vue';
   </main>
   <Footer />
   <ToastContainer />
+  <CheckoutModal />
 </template>

@@ -5,8 +5,10 @@ import logo from '../../assets/images/logo-ponto-do-lanche.webp'
 import { useCartStore } from '../../stores/cartStore'
 import { storeToRefs } from 'pinia'
 import { useToast } from '../../composables/useToast'
+import { useCheckoutModal } from '../../composables/useCheckoutModal'
 
 const { showToast } = useToast()
+const { openCheckout } = useCheckoutModal()
 const cart = useCartStore()
 const { totalItems } = storeToRefs(cart)
 
@@ -118,10 +120,8 @@ onBeforeUnmount(() => {
   document.removeEventListener('keydown', handleKeydown)
 })
 function checkout() {
-  console.log('--- Resumo do Pedido ---')
-  console.log('Itens no Carrinho:', cart.items)
-  console.log('Total:', cart.totalPrice)
-  alert('Pedido registrado no console! Verifique as ferramentas do desenvolvedor.')
+  closeCart()
+  openCheckout()
 }
 
 function handleClearCart() {
