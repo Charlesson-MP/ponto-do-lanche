@@ -143,10 +143,10 @@ onBeforeUnmount(() => {
       </div>
       <ul class="list-none flex flex-col lg:flex-row gap-6 lg:gap-8 items-center p-5 lg:p-0">
         <li><router-link to="/"
-            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Home</router-link>
+            class="text-lg font-bold text-gray-800 lg:text-white lg:hover:bg-primary-dark lg:px-5 lg:py-2 lg:rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Home</router-link>
         </li>
         <li><router-link to="/menu"
-            class="text-lg font-bold text-gray-800 lg:text-white hover:text-primary lg:hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Cardápio</router-link>
+            class="text-lg font-bold text-gray-800 lg:text-white lg:hover:bg-primary-dark lg:px-5 lg:py-2 lg:rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 rounded">Cardápio</router-link>
         </li>
       </ul>
     </nav>
