@@ -117,7 +117,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <header class="w-full bg-primary px-1 py-2 flex items-center justify-between lg:px-10">
+  <header class="w-full bg-primary px-1 py-2 flex items-center justify-between shadow-header lg:px-10 relative z-50">
     <div class="flex">
       <button ref="menuButton" class="p-2 lg:hidden" aria-label="Abrir menu de navegação" :aria-expanded="isMenuOpen"
         @click="openMenu">
