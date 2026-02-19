@@ -56,7 +56,7 @@ watch(() => props.visible, (isVisible) => {
   } else {
     document.body.style.overflow = ''
   }
-})
+}, { immediate: true })
 
 function resetState() {
   // Ingredientes removíveis iniciam como incluídos (true)
