@@ -5,8 +5,7 @@ defineProps<{
   product: Product
 }>()
 
-const emit = defineEmits(['add-to-cart'])
-
+const emit = defineEmits(['customize'])
 </script>
 
 <template>
@@ -36,7 +35,7 @@ const emit = defineEmits(['add-to-cart'])
         </span>
 
         <button class="bg-red-600 text-white px-4 py-2 rounded-lg
-                 hover:bg-red-700 transition" @click="emit('add-to-cart', product)">
+                 hover:bg-red-700 transition" @click="emit('customize', product)">
           Adicionar
         </button>
       </div>

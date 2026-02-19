@@ -176,25 +176,44 @@ onBeforeUnmount(() => {
 
       <div class="flex-1 p-5 overflow-y-auto">
         <ul v-if="totalItems > 0" class="flex flex-col gap-4">
-          <li v-for="item in cart.items" :key="item.id" class="flex items-center gap-4 border-b pb-4">
-            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-md">
+          <li v-for="item in cart.items" :key="item.cartItemId" class="flex items-start gap-4 border-b pb-4">
+            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-md flex-shrink-0">
 
-            <div class="flex-1">
+            <div class="flex-1 min-w-0">
               <h4 class="font-bold text-gray-800 text-sm">{{ item.name }}</h4>
-              <p class="text-accent font-bold text-sm">R$ {{ item.price.toFixed(2) }}</p>
+
+              <!-- Detalhes de bebida (sabor e tamanho) -->
+              <div v-if="item.selectedFlavor || item.selectedSize" class="text-xs text-teal-600 mt-0.5 font-medium">
+                🥤 {{ item.selectedFlavor }}<span v-if="item.selectedFlavor && item.selectedSize"> · </span>{{
+                  item.selectedSize }}
+              </div>
+
+              <!-- Detalhes da customização -->
+              <div v-if="item.removedIngredients.length > 0" class="text-xs text-red-400 mt-0.5">
+                Sem: {{ item.removedIngredients.join(', ') }}
+              </div>
+              <div v-if="item.selectedAddons.length > 0" class="text-xs text-green-600 mt-0.5">
+                + {{item.selectedAddons.map(a => a.name).join(', ')}}
+              </div>
+              <div v-if="item.observation" class="text-xs text-gray-400 italic mt-0.5 truncate">
+                "{{ item.observation }}"
+              </div>
+
+              <p class="text-accent font-bold text-sm mt-1">R$ {{ item.finalPrice.toFixed(2) }}</p>
 
               <div class="flex items-center gap-2 mt-2">
-                <button @click="cart.decrementItem(item.id)" class="bg-gray-200 p-1 rounded hover:bg-gray-300">
+                <button @click="cart.decrementItem(item.cartItemId)" class="bg-gray-200 p-1 rounded hover:bg-gray-300">
                   <Minus class="w-4 h-4 text-gray-700" />
                 </button>
                 <span class="text-sm font-bold text-gray-700">{{ item.quantity }}</span>
-                <button @click="cart.incrementItem(item.id)" class="bg-gray-200 p-1 rounded hover:bg-gray-300">
+                <button @click="cart.incrementItem(item.cartItemId)" class="bg-gray-200 p-1 rounded hover:bg-gray-300">
                   <Plus class="w-4 h-4 text-gray-700" />
                 </button>
               </div>
             </div>
 
-            <button @click="cart.removeItem(item.id)" class="text-red-500 hover:text-red-700">
+            <button @click="cart.removeItem(item.cartItemId)"
+              class="text-red-500 hover:text-red-700 flex-shrink-0 mt-1">
               <Trash2 class="w-5 h-5" />
             </button>
           </li>
@@ -212,6 +231,7 @@ onBeforeUnmount(() => {
           Finalizar Pedido
         </button>
       </div>
+
     </div>
   </header>
 </template>

@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
-import type { Product, CartItem } from '../types/product';
+import { defineStore } from 'pinia'
+import type { CustomizedCartItem } from '../types/product'
 
 // Chave usada no localStorage
 const CART_STORAGE_KEY = 'ponto-do-lanche-cart'
@@ -8,10 +8,20 @@ const CART_STORAGE_KEY = 'ponto-do-lanche-cart'
  * Carrega os itens do carrinho salvos no localStorage.
  * Retorna um array vazio caso não haja dados ou ocorra um erro.
  */
-function loadCartFromStorage(): CartItem[] {
+function loadCartFromStorage(): CustomizedCartItem[] {
   try {
     const data = localStorage.getItem(CART_STORAGE_KEY)
-    return data ? JSON.parse(data) : []
+    if (!data) return []
+
+    const parsed = JSON.parse(data)
+
+    // Validação: se o formato antigo (sem cartItemId), limpar
+    if (Array.isArray(parsed) && parsed.length > 0 && !parsed[0].cartItemId) {
+      localStorage.removeItem(CART_STORAGE_KEY)
+      return []
+    }
+
+    return parsed
   } catch {
     return []
   }
@@ -20,7 +30,7 @@ function loadCartFromStorage(): CartItem[] {
 /**
  * Salva os itens do carrinho no localStorage.
  */
-function saveCartToStorage(items: CartItem[]) {
+function saveCartToStorage(items: CustomizedCartItem[]) {
   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
 }
 
@@ -29,39 +39,36 @@ export const useCartStore = defineStore('cart', {
     items: loadCartFromStorage()
   }),
   actions: {
-    addItem(product: Product) {
-      const existingItem = this.items.find(
-        item => item.id === product.id
-      )
+    /**
+     * Adiciona um item customizado ao carrinho.
+     * NOTA: Em produção, o backend deve recalcular o finalPrice
+     * para evitar manipulação pelo frontend.
+     */
+    addCustomizedItem(item: CustomizedCartItem) {
+      this.items.push(item)
+      saveCartToStorage(this.items)
+    },
 
-      if (existingItem) {
-        existingItem.quantity++
-      } else {
-        this.items.push({
-          ...product,
-          quantity: 1
-        })
-      }
+    removeItem(cartItemId: string) {
+      this.items = this.items.filter(item => item.cartItemId !== cartItemId)
       saveCartToStorage(this.items)
     },
-    removeItem(productId: number) {
-      this.items = this.items.filter(item => item.id !== productId)
-      saveCartToStorage(this.items)
-    },
-    incrementItem(productId: number) {
-      const item = this.items.find(item => item.id === productId)
+
+    incrementItem(cartItemId: string) {
+      const item = this.items.find(item => item.cartItemId === cartItemId)
       if (item) {
         item.quantity++
       }
       saveCartToStorage(this.items)
     },
-    decrementItem(productId: number) {
-      const item = this.items.find(item => item.id === productId)
+
+    decrementItem(cartItemId: string) {
+      const item = this.items.find(item => item.cartItemId === cartItemId)
       if (item) {
         if (item.quantity > 1) {
           item.quantity--
         } else {
-          this.removeItem(productId)
+          this.removeItem(cartItemId)
           return // removeItem já salva no storage
         }
       }
@@ -74,8 +81,8 @@ export const useCartStore = defineStore('cart', {
 
     totalPrice: (state) =>
       state.items.reduce(
-        (total, item) => total + item.price * item.quantity,
+        (total, item) => total + item.finalPrice * item.quantity,
         0
       )
   }
-});
+})

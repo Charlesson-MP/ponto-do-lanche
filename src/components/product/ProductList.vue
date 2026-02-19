@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import type { Product } from '../../types/product.ts'
 import ProductCard from './ProductCard.vue'
+import ProductCustomizationModal from './ProductCustomizationModal.vue'
 import { useCartStore } from '../../stores/cartStore'
 import { Search } from 'lucide-vue-next'
 import { showToast } from '../../composables/useToast'
@@ -16,12 +17,49 @@ const props = withDefaults(defineProps<{
 
 const cartStore = useCartStore()
 
-// Handler que adiciona ao carrinho e exibe o toast
-function handleAddToCart(product: Product) {
-  cartStore.addItem(product)
-  showToast(`${product.name} adicionado ao carrinho!`)
+// --- Modal de customização ---
+const isModalOpen = ref(false)
+const selectedProduct = ref<Product | null>(null)
+
+function openCustomization(product: Product) {
+  selectedProduct.value = product
+  isModalOpen.value = true
 }
 
+function closeCustomization() {
+  isModalOpen.value = false
+}
+
+function handleConfirm(payload: {
+  removedIngredients: string[]
+  selectedAddons: { id: number; name: string; price: number }[]
+  observation: string
+  finalPrice: number
+  selectedFlavor?: string
+  selectedSize?: string
+}) {
+  if (!selectedProduct.value) return
+
+  cartStore.addCustomizedItem({
+    cartItemId: `${selectedProduct.value.id}-${Date.now()}`,
+    productId: selectedProduct.value.id,
+    name: selectedProduct.value.name,
+    image: selectedProduct.value.image,
+    basePrice: selectedProduct.value.price,
+    removedIngredients: payload.removedIngredients,
+    selectedAddons: payload.selectedAddons,
+    observation: payload.observation,
+    finalPrice: payload.finalPrice,
+    quantity: 1,
+    ...(payload.selectedFlavor && { selectedFlavor: payload.selectedFlavor }),
+    ...(payload.selectedSize && { selectedSize: payload.selectedSize }),
+  })
+
+  showToast(`${selectedProduct.value.name} adicionado ao carrinho!`)
+  closeCustomization()
+}
+
+// --- Filtros ---
 const searchQuery = ref('')
 const selectedCategory = ref('')
 
@@ -67,12 +105,16 @@ const filteredProducts = computed(() => {
     <!-- Grid de produtos -->
     <div v-if="filteredProducts.length" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product"
-        @add-to-cart="handleAddToCart" />
+        @customize="openCustomization" />
     </div>
 
     <!-- Mensagem quando não há resultados -->
     <p v-else class="text-center text-gray-400 py-10 text-lg">
       Nenhum produto encontrado.
     </p>
+
+    <!-- Modal de customização -->
+    <ProductCustomizationModal v-if="selectedProduct" :product="selectedProduct" :visible="isModalOpen"
+      @close="closeCustomization" @confirm="handleConfirm" />
   </section>
 </template>
