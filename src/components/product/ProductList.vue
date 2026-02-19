@@ -4,7 +4,7 @@ import type { Product } from '../../types/product.ts'
 import ProductCard from './ProductCard.vue'
 import ProductCustomizationModal from './ProductCustomizationModal.vue'
 import { useCartStore } from '../../stores/cartStore'
-import { Search } from 'lucide-vue-next'
+import { Search, ChevronDown } from 'lucide-vue-next'
 import { showToast } from '../../composables/useToast'
 
 const props = withDefaults(defineProps<{
@@ -95,12 +95,15 @@ const filteredProducts = computed(() => {
       </div>
 
       <!-- Dropdown de categoria -->
-      <select v-model="selectedCategory" class="px-4 pr-8 py-3 rounded-xl border border-gray-300 bg-white text-sm text-gray-700
-               focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-               cursor-pointer transition sm:w-auto w-full self-stretch">
-        <option value="">Todas as categorias</option>
-        <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
-      </select>
+      <div class="relative sm:w-auto w-full">
+        <select v-model="selectedCategory" class="appearance-none w-full px-4 pr-10 py-3 rounded-xl border border-gray-300 bg-white text-sm text-gray-700
+                 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
+                 cursor-pointer transition">
+          <option value="">Todas as categorias</option>
+          <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
+        </select>
+        <ChevronDown class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+      </div>
     </div>
 
     <!-- Grid de produtos -->
