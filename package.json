@@ -26,9 +26,15 @@
     "vite": "^7.3.1",
     "vue-tsc": "^3.1.5"
   },
-  "description": "This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.",
+  "description": "Responsive digital menu application with product categories, shopping cart, product search, and WhatsApp ordering.",
   "main": "postcss.config.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "vue",
+    "typescript",
+    "digital-menu",
+    "shopping-cart",
+    "whatsapp-ordering"
+  ],
+"author": "Charlesson Mendes Pereira",
+"license": "MIT"
 }
