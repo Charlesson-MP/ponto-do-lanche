@@ -131,13 +131,87 @@ The application was designed with a mobile-first approach, ensuring a consistent
 
 Possible future improvements include:
 
-- Product administration panel
-- Backend integration
-- Database persistence
-- Order management
-- Customer authentication
-- Online payment integration
-- Improved analytics and reporting
+🚀 Future Improvements
+
+The project is functional and well-structured, but there are several areas that can be improved in future iterations.
+
+🏗️ Architecture & Code Organization
+
+- [ ] Split larger components such as "CheckoutModal.vue" and "Header.vue" into smaller, more focused components.
+- [ ] Extract checkout logic into dedicated composables for form management, customer data persistence, and order generation.
+- [ ] Centralize business configuration such as WhatsApp number, delivery fee, opening hours, and contact information.
+- [ ] Standardize the use of theme tokens instead of hardcoded colors throughout components.
+- [ ] Improve TypeScript typing for component events and shared data structures.
+- [ ] Move business rules currently embedded in components into reusable configuration or domain logic.
+
+🛒 Cart & Checkout
+
+- [ ] Improve cart item ID generation by replacing the current "Date.now()" strategy with a more robust identifier.
+- [ ] Strengthen monetary calculations and consider using integer cents for financial values.
+- [ ] Include individual add-on prices in the WhatsApp order summary.
+- [ ] Add an order identifier and timestamp to generated orders.
+- [ ] Improve validation for the change/cash payment field.
+- [ ] Clarify the checkout success message, since the application opens WhatsApp but cannot confirm whether the customer actually sent the message.
+- [ ] Consider a more complete order management and payment solution if the project evolves into a production system.
+
+🔎 Product Search & Catalog
+
+- [ ] Update the product search to also search through ingredients, matching the search field description.
+- [ ] Make search accent-insensitive, allowing queries such as "acai" to match "Açaí".
+- [ ] Improve category and filtering management.
+- [ ] Consider lazy-loading product images to improve performance with larger catalogs.
+
+♿ Accessibility
+
+- [ ] Implement complete focus management for checkout and product customization modals.
+- [ ] Restore focus to the element that opened a modal after it is closed.
+- [ ] Improve focus management for the cart-clear confirmation modal.
+- [ ] Add accessible announcements for important UI changes, such as cart updates and toast notifications.
+- [ ] Use semantic form controls for payment method selection.
+- [ ] Review interactive elements for complete keyboard navigation support.
+- [ ] Consider supporting "prefers-reduced-motion" for users who prefer reduced animations.
+
+💾 Data Persistence & Privacy
+
+- [ ] Add error handling when saving customer data to "localStorage".
+- [ ] Provide an option for users to clear their locally stored customer information.
+- [ ] Document how customer information such as name, phone number, and address is stored locally.
+- [ ] Reassess the persistence strategy if the application eventually introduces user accounts or server-side orders.
+
+🎨 UI & User Experience
+
+- [ ] Replace placeholder footer links ("href="#"") with actual destinations.
+- [ ] Centralize business information to avoid duplicating contact details and opening hours throughout the application.
+- [ ] Improve toast responsiveness on smaller screens.
+- [ ] Consider allowing users to manually dismiss toast notifications.
+- [ ] Continue reviewing the visual and semantic hierarchy as new features are introduced.
+
+🧪 Testing
+
+- [ ] Add unit tests for core business logic.
+- [ ] Test checkout validation.
+- [ ] Test delivery fee and add-on calculations.
+- [ ] Test the maximum add-on selection limit.
+- [ ] Test product search and filtering.
+- [ ] Test WhatsApp order message generation.
+- [ ] Add integration/E2E tests for the complete flow:
+  "Product → Customization → Cart → Checkout".
+
+📚 Documentation
+
+- [ ] Expand the documentation of the project architecture.
+- [ ] Document important technical decisions.
+- [ ] Add complete installation and development instructions.
+- [ ] Document business configuration and customization options.
+- [ ] Add screenshots or GIFs demonstrating the application.
+- [ ] Document known limitations and planned improvements.
+- [ ] Product administration panel
+- [ ] Backend integration
+- [ ] Database persistence
+- [ ] Order management
+- [ ] Customer authentication
+- [ ] Online payment integration
+- [ ] Improved analytics and reporting
 
 ## 👨‍💻 Author
 
