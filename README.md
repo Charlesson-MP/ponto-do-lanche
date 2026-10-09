@@ -129,14 +129,6 @@ The application was designed with a mobile-first approach, ensuring a consistent
 
 ## 🔮 Future Improvements
 
-Possible future improvements include:
-
-🚀 Future Improvements
-
-The project is functional and well-structured, but there are several areas that can be improved in future iterations.
-
-🏗️ Architecture & Code Organization
-
 - [ ] Split larger components such as "CheckoutModal.vue" and "Header.vue" into smaller, more focused components.
 - [ ] Extract checkout logic into dedicated composables for form management, customer data persistence, and order generation.
 - [ ] Centralize business configuration such as WhatsApp number, delivery fee, opening hours, and contact information.
@@ -205,6 +197,8 @@ The project is functional and well-structured, but there are several areas that 
 - [ ] Document business configuration and customization options.
 - [ ] Add screenshots or GIFs demonstrating the application.
 - [ ] Document known limitations and planned improvements.
+
+## 🚀 Future Features
 - [ ] Product administration panel
 - [ ] Backend integration
 - [ ] Database persistence
